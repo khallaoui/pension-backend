@@ -34,4 +34,19 @@ public class OperationService {
     public void deleteOperation(Long id) {
         operationRepository.deleteById(id);
     }
+    
+    
+    public List<Operation> getOperationsByPensionerId(Long pensionerId) {
+        return operationRepository.findByPensionerId(pensionerId);
+    }
+
+    public double getTotalAmountByPensioner(Long pensionerId) {
+        List<Operation> operations = operationRepository.findByPensionerId(pensionerId);
+        return operations.stream()
+                         .mapToDouble(op -> op.getAmount() != null ? op.getAmount().doubleValue() : 0.0)
+                         .sum();
+    }
+
+
+
 }

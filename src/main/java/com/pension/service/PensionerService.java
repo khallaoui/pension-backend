@@ -5,7 +5,9 @@ import com.pension.repository.PensionerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PensionerService {
@@ -43,4 +45,15 @@ public class PensionerService {
     public List<Pensioner> getPensionersByCity(String city) {
         return pensionerRepository.findByCity(city);
     }
+    
+    public Map<String, Long> getPensionersGroupedByCity() {
+        List<Object[]> results = pensionerRepository.findPensionersGroupedByCity();
+        return results.stream()
+            .collect(Collectors.toMap(
+                row -> (String) row[0],
+                row -> (Long) row[1]
+            ));
+    }
+
+
 }

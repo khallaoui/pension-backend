@@ -43,4 +43,14 @@ public class OperationController {
         operationService.deleteOperation(id);
         return ResponseEntity.ok().build();
     }
+    
+    @GetMapping("/pensioner/{pensionerId}")
+    public ResponseEntity<List<Operation>> getOperationsByPensionerId(@PathVariable Long pensionerId) {
+        List<Operation> operations = operationService.getOperationsByPensionerId(pensionerId);
+        if (operations.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(operations);
+    }
+
 }
