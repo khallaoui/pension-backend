@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/consultations")
-@CrossOrigin(origins = "http://localhost:3000") // adapt your frontend origin
+@CrossOrigin(origins = "http://localhost:9002") // adapt your frontend origin
 public class ConsultationController {
 
     private final ConsultationService consultationService;
@@ -28,7 +28,7 @@ public class ConsultationController {
 
     // Consultation des affiliés actifs ou ayant droit
     @GetMapping("/affiliates/active-or-beneficiaries")
-    public List<Affiliate> getActiveOrBeneficiaries() {
+    public List<Affilie> getActiveOrBeneficiaries() {
         return consultationService.getActiveOrBeneficiaries();
     }
 

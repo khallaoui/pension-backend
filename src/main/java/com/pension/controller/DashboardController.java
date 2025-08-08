@@ -1,6 +1,6 @@
 package com.pension.controller;
 
-import com.pension.repository.PensionerRepository;
+import com.pension.repository.AdherentRepository;
 import com.pension.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,24 +13,23 @@ import java.util.Map;
 public class DashboardController {
     
     @Autowired
-    private PensionerRepository pensionerRepository;
+    private AdherentRepository adherentRepository;
     
     @Autowired
     private OperationRepository operationRepository;
     
-    // GET /api/dashboard/stats - Get dashboard statistics
     @GetMapping("/stats")
     public Map<String, Object> getDashboardStats() {
         Map<String, Object> stats = new HashMap<>();
         
         // Total pensioners
-        stats.put("totalPensioners", pensionerRepository.count());
+        stats.put("totalPensioners", adherentRepository.count());
         
-        // Pensioners by city
-        stats.put("pensionersByCity", pensionerRepository.countPensionersByCity());
+        // Pensioners by city - utiliser le nom correct
+        stats.put("pensionersByCity", adherentRepository.countAdherentsByCity());
         
-        // Pensioners by payment method
-        stats.put("pensionersByPaymentMethod", pensionerRepository.countPensionersByPaymentMethod());
+        // Pensioners by payment method - utiliser le nom correct
+        stats.put("pensionersByPaymentMethod", adherentRepository.countAdherentsByPaymentMethod());
         
         // Recent operations count
         stats.put("totalOperations", operationRepository.count());

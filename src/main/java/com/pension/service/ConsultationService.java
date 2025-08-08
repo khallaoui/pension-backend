@@ -11,7 +11,7 @@ import java.util.Optional;
 public class ConsultationService {
 
     private final AdherentRepository adherentRepo;
-    private final AffiliateRepository affiliateRepo;
+    private final AffilieRepository affiliateRepo;
     private final RetireeRepository retireeRepo;
     private final SalaryRepository salaryRepo;
     private final AllocataireRepository allocataireRepo;
@@ -19,7 +19,7 @@ public class ConsultationService {
     @Autowired
     public ConsultationService(
         AdherentRepository a,
-        AffiliateRepository af,
+        AffilieRepository af,
         RetireeRepository r,
         SalaryRepository s,
         AllocataireRepository al) {
@@ -35,7 +35,7 @@ public class ConsultationService {
         return adherentRepo.findAll();
     }
 
-    public List<Affiliate> getActiveOrBeneficiaries() {
+    public List<Affilie> getActiveOrBeneficiaries() {
         return affiliateRepo.findByActifTrueOrAyantDroitTrue();
     }
 
@@ -44,7 +44,7 @@ public class ConsultationService {
     }
 
     public List<Salary> getSalariesByAllocataire(Long allocataireId) {
-        return salaryRepo.findByAllocataireId(allocataireId);
+        return salaryRepo.findByAllocataireIdAllocataire(allocataireId);
     }
 
     public Optional<Allocataire> getAllocataireStatus(Long id) {

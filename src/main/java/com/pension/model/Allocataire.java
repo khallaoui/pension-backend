@@ -1,18 +1,36 @@
 package com.pension.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
-@Table(name = "allocataires")
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Prevents Hibernate proxy issues
 public class Allocataire {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idAllocataire;
+
+    private String numeroDossier;
     private String nom;
-    private String situation;
+    private String prenom;
+
+ 
+    @ManyToOne
+    @JoinColumn(name = "id_affilie")
+    @JsonIgnore // Completely ignores affilie during serialization
+    private Affilie affilie;
+
+    @OneToMany(mappedBy = "allocataire", cascade = CascadeType.ALL)
+    @JsonIgnore // Completely ignores salaries during serialization
+    private List<Salary> salaries;
 }

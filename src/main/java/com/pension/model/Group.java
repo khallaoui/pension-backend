@@ -28,5 +28,5 @@ public class Group {
         joinColumns = @JoinColumn(name = "group_id"),
         inverseJoinColumns = @JoinColumn(name = "pensioner_id")
     )
-    private Set<Pensioner> pensioners = new HashSet<>();
+    private Set<Adherent> pensioners = new HashSet<>();
 }

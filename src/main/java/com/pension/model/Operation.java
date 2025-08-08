@@ -22,7 +22,7 @@ public class Operation {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pensioner_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Pensioner pensioner;
+    private Adherent pensioner;
     
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;

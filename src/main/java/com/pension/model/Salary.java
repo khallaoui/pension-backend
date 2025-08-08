@@ -6,6 +6,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "salaries")
 @Data
@@ -20,10 +22,9 @@ public class Salary {
 
     private LocalDate date;
 
-    // example relation to Allocataire (if any)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "allocataire_id")
-    private Allocataire allocataire;
 
-    // other fields ...
+
+    @ManyToOne
+    @JsonBackReference
+    private Allocataire allocataire;
 }
